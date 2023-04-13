@@ -60,4 +60,11 @@ export class TodosAccess {
 
         return item.Attributes as TodoUpdate
     }
+
+    async deleteTodo(uId:string, tId:string) {
+        await this.documentClient.delete({
+            TableName: this.todoTable,
+            Key: {'userId': uId, 'todoId': tId}
+        }).promise()
+    }
 }
