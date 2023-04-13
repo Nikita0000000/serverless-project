@@ -1,5 +1,5 @@
 # TODO: Change the name of the org 
-org: nikitta
+org: nikita0000000
 app: serverless-todo-app
 service: serverless-todo-app
 
@@ -186,27 +186,28 @@ resources:
     AttachmentsBucket:
       Type: AWS::S3::Bucket
       Properties:
-      BucketName: ${self:provider.environment.ATTACHMENT_S3_BUCKET}
-      CorsConfiguration:
-          CorsRules:
-            - 
-              AllowedOrigins:
-                - '*'
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - GET
-                - PUT
-                - POST
-                - DELETE
-                - HEAD
-              MaxAge: 3000
+        BucketName: ${self:provider.environment.ATTACHMENT_S3_BUCKET}
+        CorsConfiguration:
+            CorsRules:
+              - 
+                AllowedOrigins:
+                  - '*'
+                AllowedHeaders:
+                  - '*'
+                AllowedMethods:
+                  - GET
+                  - PUT
+                  - POST
+                  - DELETE
+                  - HEAD
+                MaxAge: 3000
 
     # TODO: Complete the policy below and attach it to the bucket defined above
     # For cross referencing the name of the bucket, use "!Ref AttachmentsBucket"
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
+        Bucket: !Ref AttachmentsBucket
         PolicyDocument:
           Id: MyS3Policy
           Version: "2012-10-17"
@@ -216,7 +217,6 @@ resources:
               Principal: '*'
               Action: 's3:GetObject'
               Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
-        Bucket: !Ref AttachmentsBucket
 
     RequestBodyValidator:
       Type: AWS::ApiGateway::RequestValidator
