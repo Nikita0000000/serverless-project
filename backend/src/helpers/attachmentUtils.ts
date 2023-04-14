@@ -8,14 +8,16 @@ const signVersion = new XAWS.S3({signatureVersion: 'v4'})
 export class AttachmentUtils {
     constructor(
         private readonly buckerName:string = process.env.ATTACHMENT_S3_BUCKET,
-        private readonly expireAt:string = process.env.SIGNED_URL_EXPIRATION
+        private readonly expireAt:number = parseInt(process.env.SIGNED_URL_EXPIRATION)
     ){}
         async generateUploadUrl(uid:string, tid:string): Promise<string>{
-            const attachmentUrl:string = await signVersion.getSignedUrl({
-                Bucket: this.buckerName,
-                Key: `image-${uid}-${tid}`,
-                Expires: this.expireAt
-            })
+            const attachmentUrl:string = await signVersion.getSignedUrl(
+                'putObject',
+                {
+                    Bucket: this.buckerName,
+                    Key: `image-${uid}-${tid}`,
+                    Expires: this.expireAt
+                })
 
             return attachmentUrl
         }
