@@ -24,7 +24,7 @@ export class TodosAccess {
             TableName: this.todoTable,
             IndexName: this.createAtIndex,
             KeyConditionExpression: 'userId = :userId',
-            ExpressionAttributeValues: {'userId': uId}
+            ExpressionAttributeValues: {':userId': uId}
 
         }).promise()
         return query.Items as TodoItem[]
@@ -49,10 +49,10 @@ export class TodosAccess {
                 '#DDATE': 'dueDate',
                 '#DONE': 'done'
             },
-            UpdateExpression: 'SET #NAMES = :name, #DDATE = :dueDate, #DONE = done',
+            UpdateExpression: 'SET #NAMES = :name, #DDATE = :dueDate, #DONE = :done',
             ExpressionAttributeValues: {
                 ':name': updateTodo.name,
-                'dueDate': updateTodo.dueDate,
+                ':dueDate': updateTodo.dueDate,
                 ':done': updateTodo.done
             },
             ReturnValues: 'UPDATED_NEW'
