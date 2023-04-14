@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "d0700d24-79ec-487e-8403-b565bef7f8e0",
-		"name": "Udacity C4 Project",
+		"_postman_id": "688fad6d-01b9-4949-a4d4-7778d312069e",
+		"name": "Udacity C4 Project Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -19,10 +19,6 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
 						"url": {
 							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos",
 							"protocol": "https",
@@ -83,7 +79,7 @@
 				{
 					"name": "Update todo",
 					"request": {
-						"method": "PUT",
+						"method": "PATCH",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -102,7 +98,7 @@
 							"raw": "{\n\t\"name\": \"Change the world\",\n\t\"dueDate\": \"2019-12-11\",\n\t\"done\": true\n}"
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/35dd600f-43c2-4649-903c-615e1586a26f",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/cfe4e826-4f56-4ddb-8629-2b9dd12ede4d",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -114,7 +110,7 @@
 							"path": [
 								"dev",
 								"todos",
-								"35dd600f-43c2-4649-903c-615e1586a26f"
+								"cfe4e826-4f56-4ddb-8629-2b9dd12ede4d"
 							]
 						}
 					},
@@ -176,7 +172,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/3836b777-9bc4-4429-9b79-ba4e4f5f91c0/attachment",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/todos/cfe4e826-4f56-4ddb-8629-2b9dd12ede4d/attachment",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -188,7 +184,7 @@
 							"path": [
 								"dev",
 								"todos",
-								"3836b777-9bc4-4429-9b79-ba4e4f5f91c0",
+								"cfe4e826-4f56-4ddb-8629-2b9dd12ede4d",
 								"attachment"
 							]
 						}
@@ -200,7 +196,6 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "ce2b42d4-8cc5-4f30-a6ed-e7f0f303c3fd",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -210,7 +205,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "efb16c49-3866-4241-97d1-360ad72736d8",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -224,7 +218,6 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "2e83c0fe-6650-44d5-a90f-4c27ff720d83",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -234,7 +227,6 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "977c227e-2df3-42eb-9a48-ec25e2f7eeae",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -244,15 +236,13 @@
 	],
 	"variable": [
 		{
-			"id": "bf208e6b-f66d-4008-9366-dd541ff65425",
 			"key": "apiId",
-			"value": "",
+			"value": "hyxw3bk6y4",
 			"type": "string"
 		},
 		{
-			"id": "9bc6399a-d2bb-4f2d-9ffa-8480370d383c",
 			"key": "authToken",
-			"value": "",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImU1Xzg2a1FBeEVCQzc0WnVZRTNOSSJ9.eyJpc3MiOiJodHRwczovL2Rldi1tMDVoZDR3NDh3MzdsMGF5LnVzLmF1dGgwLmNvbS8iLCJhdWQiOiJJb0dVdzdGZHJkVE5LSE15VHpGU0ZNV0pOYWhObVFaUCIsImlhdCI6MTY4MTM1NzY0NiwiZXhwIjoxNjgxOTk3NjQ1LCJzdWIiOiJhdXRoMHw2NDM3N2I0ZDdiNTI1ZjEwYWU2OTY0M2EiLCJhdF9oYXNoIjoiVHJMOTBVRDFTSnVNaTlwakpXS0JhdyIsInNpZCI6IlliMUNLMkx1eE9LVXh6dnJsQVgwUmtXOTRMaWF2T3o3Iiwibm9uY2UiOiJBWS40SXRCMGQyYk5yaWVNS2lrMDRya0ZsNU1nTnpmSSJ9.IQWMBNPKAo2rkIYLLuZPbNIPXGA5J5EwSF1RjqsqWzbq0ZNO-vprT6Ip3tEHaK1umu4g5E5zGouzFW2Juu9mqXGqg3ywLSTB2NWObuMlSfii53rLdP3W0v6vjPA43SWe2tCGooTacmUIbn00dwIHNdeRKVl5Bb4vDMOyOSEVwpJq9eYVMUqaP8GM-BQ0fmMg8dlb0wTURp3pXjhQQlbuUqD9qOIEiEsLCNbLAZsS8aH-yrN8YYiYGC50gWACN_7loa_ZchDlNRepu3EdQ3Wnjm6eiXjPN3Nul-iSpBkoCSz-lO6NMdCImXn03pxZ87TgwIeDSpj7jBCucAdQDcHTvA",
 			"type": "string"
 		}
 	]
