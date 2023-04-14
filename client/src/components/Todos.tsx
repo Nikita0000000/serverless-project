@@ -40,6 +40,10 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
     this.setState({ newTodoName: event.target.value })
   }
 
+  handleBroken = (event: React.SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.style.visibility = "hidden";
+  }
+
   onEditButtonClick = (todoId: string) => {
     this.props.history.push(`/todos/${todoId}/edit`)
   }
@@ -193,7 +197,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
                 </Button>
               </Grid.Column>
               {todo.attachmentUrl && (
-                <Image src={todo.attachmentUrl} size="small" wrapped />
+                <Image src={todo.attachmentUrl} size="small" wrapped onError={this.handleBroken} />
               )}
               <Grid.Column width={16}>
                 <Divider />
