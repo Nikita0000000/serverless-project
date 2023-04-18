@@ -26,7 +26,7 @@ provider:
   environment:
     TODOS_TABLE: Todos-${self:provider.stage}
     TODOS_CREATED_AT_INDEX: CreatedAtIndex
-    ATTACHMENT_S3_BUCKET: serverless-project-c4-todo-images-${self:provider.stage}
+    ATTACHMENT_S3_BUCKET: serverless-todo-app-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
 
   logs:
@@ -134,8 +134,8 @@ functions:
     iamRoleStatements:
       - Effect: Allow
         Action:
-          - 's3:GetObject'
           - 's3:PutObject'
+          - 's3:GetObject'
         Resource: "arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*"
 
 resources:
@@ -148,8 +148,8 @@ resources:
       Properties:
         ResponseParameters:
           gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
-          gatewayresponse.header.Access-Control-Allow-Headers: "'Context-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
           gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS,POST'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'Context-Type, X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
         ResponseType: DEFAULT_4XX
         RestApiId:
           Ref: 'ApiGatewayRestApi'
