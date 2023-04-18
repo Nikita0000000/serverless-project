@@ -2,9 +2,9 @@ import * as AWS from 'aws-sdk'
 import * as AWSXRay from 'aws-xray-sdk'
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { createLogger } from '../utils/logger'
-import { TodoItem } from '../models/TodoItem'
 import { TodoUpdate } from '../models/TodoUpdate';
 import { UpdateTodoRequest } from '../requests/UpdateTodoRequest'
+import { TodoItem } from '../models/TodoItem'
 
 const XAWS = AWSXRay.captureAWS(AWS)
 
@@ -14,9 +14,19 @@ const logger = createLogger('TodosAccess')
 export class TodosAccess {
     constructor(
         private readonly documentClient: DocumentClient = new XAWS.DynamoDB.DocumentClient(),
-        private readonly todoTable: string = process.env.TODOS_TABLE,
-        private readonly createAtIndex:string = process.env.TODOS_CREATED_AT_INDEX
+        private readonly createAtIndex:string = process.env.TODOS_CREATED_AT_INDEX,
+        private readonly todoTable: string = process.env.TODOS_TABLE
     ){}
+
+    async createTodo(newTodo:TodoItem): Promise<TodoItem> {
+        logger.info("Adding new Todo Item to database ...")
+        await this.documentClient.put({
+            TableName: this.todoTable,
+            Item: newTodo
+        }).promise()
+
+        return newTodo
+    }
 
     async getTodosForUser(uId:string): Promise<TodoItem[]>{
         logger.info(`Selecting all Todo Items for user: ${uId}`)
@@ -28,16 +38,6 @@ export class TodosAccess {
 
         }).promise()
         return query.Items as TodoItem[]
-    }
-
-    async createTodo(newTodo:TodoItem): Promise<TodoItem> {
-        logger.info("Adding new Todo Item to database ...")
-        await this.documentClient.put({
-            TableName: this.todoTable,
-            Item: newTodo
-        }).promise()
-
-        return newTodo
     }
 
     async updateTodo(uId: string, tId: string, updateTodo:UpdateTodoRequest): Promise<TodoUpdate>{
